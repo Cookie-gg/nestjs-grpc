@@ -21,7 +21,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "protoc": "protoc --ts_proto_opt=nestJs=true --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. ./proto/user.proto"
+    "protoc": "protoc --ts_proto_opt=nestJs=true --ts_proto_opt=Mgoogle/protobuf/empty.proto=google-protobuf/google/protobuf/empty_pb --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. ./proto/user.proto"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.12",
