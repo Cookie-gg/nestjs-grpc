@@ -4,12 +4,22 @@ package user;
 
 import "google/protobuf/empty.proto";
 
-
 service UserService {
     rpc Get (GetUserRequest) returns (User) {}
     rpc GetMany (google.protobuf.Empty) returns (Users) {}
-    rpc Create (CreateUserRequest) returns (User) {}
-    rpc Update (User) returns (User) {}
+    rpc Create (UpdateUserRequest) returns (google.protobuf.Empty) {}
+    rpc Update (User) returns (google.protobuf.Empty) {}
+    rpc Delete (GetUserRequest) returns (google.protobuf.Empty) {}
+}
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message Users {
+    repeated User users = 1;
 }
 
 message GetUserRequest {
@@ -21,12 +31,10 @@ message CreateUserRequest {
     string email = 2;
 }
 
-message User {
+message UpdateUserRequest {
     int32 id = 1;
-    string name = 2;
-    string email = 3;
-}
-
-message Users {
-    repeated User users = 1;
+    message Updates {
+        string name = 2;
+        string email = 3;
+    }
 }

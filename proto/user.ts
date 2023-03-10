@@ -5,15 +5,6 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "user";
 
-export interface GetUserRequest {
-  id: number;
-}
-
-export interface CreateUserRequest {
-  name: string;
-  email: string;
-}
-
 export interface User {
   id: number;
   name: string;
@@ -24,6 +15,24 @@ export interface Users {
   users: User[];
 }
 
+export interface GetUserRequest {
+  id: number;
+}
+
+export interface CreateUserRequest {
+  name: string;
+  email: string;
+}
+
+export interface UpdateUserRequest {
+  id: number;
+}
+
+export interface UpdateUserRequest_Updates {
+  name: string;
+  email: string;
+}
+
 export const USER_PACKAGE_NAME = "user";
 
 export interface UserServiceClient {
@@ -31,9 +40,11 @@ export interface UserServiceClient {
 
   getMany(request: Empty): Observable<Users>;
 
-  create(request: CreateUserRequest): Observable<User>;
+  create(request: UpdateUserRequest): Observable<Empty>;
 
-  update(request: User): Observable<User>;
+  update(request: User): Observable<Empty>;
+
+  delete(request: GetUserRequest): Observable<Empty>;
 }
 
 export interface UserServiceController {
@@ -41,14 +52,16 @@ export interface UserServiceController {
 
   getMany(request: Empty): Promise<Users> | Observable<Users> | Users;
 
-  create(request: CreateUserRequest): Promise<User> | Observable<User> | User;
+  create(request: UpdateUserRequest): void;
 
-  update(request: User): Promise<User> | Observable<User> | User;
+  update(request: User): void;
+
+  delete(request: GetUserRequest): void;
 }
 
 export function UserServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["get", "getMany", "create", "update"];
+    const grpcMethods: string[] = ["get", "getMany", "create", "update", "delete"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UserService", method)(constructor.prototype[method], method, descriptor);

@@ -27,6 +27,17 @@ function deserialize_user_GetUserRequest(buffer_arg) {
   return user_pb.GetUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_user_UpdateUserRequest(arg) {
+  if (!(arg instanceof user_pb.UpdateUserRequest)) {
+    throw new Error('Expected argument of type user.UpdateUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_user_UpdateUserRequest(buffer_arg) {
+  return user_pb.UpdateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_user_User(arg) {
   if (!(arg instanceof user_pb.User)) {
     throw new Error('Expected argument of type user.User');
@@ -72,6 +83,39 @@ var UserServiceService = exports.UserServiceService = {
     requestDeserialize: deserialize_google_protobuf_Empty,
     responseSerialize: serialize_user_Users,
     responseDeserialize: deserialize_user_Users,
+  },
+  create: {
+    path: '/user.UserService/Create',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.UpdateUserRequest,
+    responseType: google_protobuf_empty_pb.Empty,
+    requestSerialize: serialize_user_UpdateUserRequest,
+    requestDeserialize: deserialize_user_UpdateUserRequest,
+    responseSerialize: serialize_google_protobuf_Empty,
+    responseDeserialize: deserialize_google_protobuf_Empty,
+  },
+  update: {
+    path: '/user.UserService/Update',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.User,
+    responseType: google_protobuf_empty_pb.Empty,
+    requestSerialize: serialize_user_User,
+    requestDeserialize: deserialize_user_User,
+    responseSerialize: serialize_google_protobuf_Empty,
+    responseDeserialize: deserialize_google_protobuf_Empty,
+  },
+  delete: {
+    path: '/user.UserService/Delete',
+    requestStream: false,
+    responseStream: false,
+    requestType: user_pb.GetUserRequest,
+    responseType: google_protobuf_empty_pb.Empty,
+    requestSerialize: serialize_user_GetUserRequest,
+    requestDeserialize: deserialize_user_GetUserRequest,
+    responseSerialize: serialize_google_protobuf_Empty,
+    responseDeserialize: deserialize_google_protobuf_Empty,
   },
 };
 
