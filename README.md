@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+gRpc with [NestJS](https://github.com/nestjs/nest) and Prisma
+
+Using Next.js with grpc-js as a playground
 
 ## Installation
 
@@ -43,6 +45,18 @@ $ yarn run start:dev
 
 # production mode
 $ yarn run start:prod
+```
+
+### Playground
+
+```bash
+$ yarn workspace playground run dev
+```
+
+### PostgresSQL
+
+```bash
+$ docker-compose up -d
 ```
 
 ## Test

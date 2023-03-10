@@ -26,11 +26,7 @@ export interface CreateUserRequest {
 
 export interface UpdateUserRequest {
   id: number;
-}
-
-export interface UpdateUserRequest_Updates {
-  name: string;
-  email: string;
+  updates: CreateUserRequest | undefined;
 }
 
 export const USER_PACKAGE_NAME = "user";
@@ -40,9 +36,9 @@ export interface UserServiceClient {
 
   getMany(request: Empty): Observable<Users>;
 
-  create(request: UpdateUserRequest): Observable<Empty>;
+  create(request: CreateUserRequest): Observable<Empty>;
 
-  update(request: User): Observable<Empty>;
+  update(request: UpdateUserRequest): Observable<Empty>;
 
   delete(request: GetUserRequest): Observable<Empty>;
 }
@@ -52,9 +48,9 @@ export interface UserServiceController {
 
   getMany(request: Empty): Promise<Users> | Observable<Users> | Users;
 
-  create(request: UpdateUserRequest): void;
+  create(request: CreateUserRequest): void;
 
-  update(request: User): void;
+  update(request: UpdateUserRequest): void;
 
   delete(request: GetUserRequest): void;
 }

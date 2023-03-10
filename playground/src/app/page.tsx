@@ -1,37 +1,12 @@
 import Image from 'next/image';
-import { Inter } from 'next/font/google';
+import { backend } from '~/libs/grpc';
 import styles from './page.module.css';
-import { SampleData, SampleDataById } from 'codegen/sample_pb';
-import { AppServiceClient } from 'codegen/sample_grpc_pb';
-import { credentials } from '@grpc/grpc-js';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const fetcher = async (id: number) => {
-  try {
-    const Request = new SampleDataById().setId(id);
-    const Client = new AppServiceClient(
-      'localhost:50051',
-      credentials.createInsecure(),
-    );
-    return new Promise<SampleData.AsObject>((resolve, reject) => {
-      Client.findOne(Request, (err, res) => {
-        if (err) {
-          console.log(err);
-          return reject(err);
-        } else {
-          const user = res.toObject();
-          return resolve(user);
-        }
-      });
-    });
-  } catch {
-    return null;
-  }
-};
-
 export default async function Home() {
-  const res = await fetcher(1);
+  const res = await backend.user.get(1);
   console.log(res);
 
   return (

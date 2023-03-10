@@ -3,6 +3,7 @@ import { GrpcMethod } from '@nestjs/microservices';
 import {
   CreateUserRequest,
   GetUserRequest,
+  UpdateUserRequest,
   User,
   Users,
   UserServiceController,
@@ -15,8 +16,8 @@ export class UserController implements UserServiceController {
   constructor(private readonly prismaService: PrismaService) {}
 
   @GrpcMethod(USER_SERVICE_NAME)
-  async get(data: GetUserRequest): Promise<User> {
-    return this.prismaService.user.findUnique({ where: { id: data.id } });
+  async get({ id }: GetUserRequest): Promise<User> {
+    return this.prismaService.user.findUnique({ where: { id } });
   }
 
   @GrpcMethod(USER_SERVICE_NAME)
@@ -31,7 +32,12 @@ export class UserController implements UserServiceController {
   }
 
   @GrpcMethod(USER_SERVICE_NAME)
-  async update(data: User): Promise<User> {
-    return this.prismaService.user.update({ where: { id: data.id }, data });
+  async update({ id, updates }: UpdateUserRequest): Promise<User> {
+    return this.prismaService.user.update({ where: { id }, data: updates });
+  }
+
+  @GrpcMethod(USER_SERVICE_NAME)
+  async delete({ id }: GetUserRequest): Promise<User> {
+    return this.prismaService.user.delete({ where: { id } });
   }
 }

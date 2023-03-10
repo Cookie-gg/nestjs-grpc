@@ -102,6 +102,11 @@ export class UpdateUserRequest extends jspb.Message {
     getId(): number;
     setId(value: number): UpdateUserRequest;
 
+    hasUpdates(): boolean;
+    clearUpdates(): void;
+    getUpdates(): CreateUserRequest | undefined;
+    setUpdates(value?: CreateUserRequest): UpdateUserRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): UpdateUserRequest.AsObject;
     static toObject(includeInstance: boolean, msg: UpdateUserRequest): UpdateUserRequest.AsObject;
@@ -115,30 +120,6 @@ export class UpdateUserRequest extends jspb.Message {
 export namespace UpdateUserRequest {
     export type AsObject = {
         id: number,
+        updates?: CreateUserRequest.AsObject,
     }
-
-
-    export class Updates extends jspb.Message { 
-        getName(): string;
-        setName(value: string): Updates;
-        getEmail(): string;
-        setEmail(value: string): Updates;
-
-        serializeBinary(): Uint8Array;
-        toObject(includeInstance?: boolean): Updates.AsObject;
-        static toObject(includeInstance: boolean, msg: Updates): Updates.AsObject;
-        static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-        static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-        static serializeBinaryToWriter(message: Updates, writer: jspb.BinaryWriter): void;
-        static deserializeBinary(bytes: Uint8Array): Updates;
-        static deserializeBinaryFromReader(message: Updates, reader: jspb.BinaryReader): Updates;
-    }
-
-    export namespace Updates {
-        export type AsObject = {
-            name: string,
-            email: string,
-        }
-    }
-
 }

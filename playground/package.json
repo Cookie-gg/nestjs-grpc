@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "grpc_tools_node_protoc --plugin=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:codegen --grpc_out=grpc_js:codegen --ts_out=grpc_js:codegen -I ./ ../proto/sample.proto"
+    "protoc": "grpc_tools_node_protoc --proto_path ../proto --plugin=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./src/libs/grpc/codegen --grpc_out=grpc_js:./src/libs/grpc/codegen --ts_out=grpc_js:./src/libs/grpc/codegen -I ./src/libs/grpc/codegen ../proto/user.proto"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.12",
